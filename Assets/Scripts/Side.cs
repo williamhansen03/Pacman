@@ -9,6 +9,7 @@ public class Side : MonoBehaviour
     public Transform right;
     public Transform left;
     public Transform pacman;
+    public Transform ghost;
 
     public Vector3 offset;
 
@@ -37,6 +38,20 @@ public class Side : MonoBehaviour
             {
                 pacman.transform.position = right.position + offset;
                 
+            }
+        }
+
+        if (collision.gameObject.name == "Ghost")
+        {
+            if (RighitWall == true)
+            {
+                ghost.transform.position = left.position + offset;
+
+            }
+            if (RighitWall == false)
+            {
+                ghost.transform.position = right.position + offset;
+
             }
         }
     }

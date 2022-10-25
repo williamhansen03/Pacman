@@ -8,6 +8,7 @@ public class LevelGenerater : MonoBehaviour
 
     public GameObject cube;
 
+    public GameObject greenPoints;
     public GameObject point;
     public GameObject Ghost;
 
@@ -30,6 +31,11 @@ public class LevelGenerater : MonoBehaviour
                 {
                     Instantiate(point, new Vector2(x, y), Quaternion.identity);
                 }
+                /*
+                if(image.GetPixel(x,y) == Color.green)
+                {
+                    Instantiate(greenPoints, new Vector2(x, y), Quaternion.identity);
+                }*/
             }
         }
         Debug.Log(mengde);

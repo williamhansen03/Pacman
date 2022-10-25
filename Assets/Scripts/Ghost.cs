@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditorInternal;
+using Unity.VisualScripting;
 
 public class Ghost : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Ghost : MonoBehaviour
     private float speed = 6f;
 
     public int random = 0;
+    int greenPoint = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -22,21 +24,21 @@ public class Ghost : MonoBehaviour
 
     void FixedUpdate()
     {
-        
-        if (random == 0)
+
+        if (random == 0) // höger
         {
             rb.MovePosition(new Vector2(speed, 0) * Time.deltaTime + rb.position);
 
         }
-        else if (random == 1)
+        else if (random == 2) //vänster
         {
             rb.MovePosition(new Vector2(-speed, 0) * Time.deltaTime + rb.position);
         }
-        else if (random == 2)
+        else if (random == 1) // upp
         {
             rb.MovePosition(new Vector2(0, speed) * Time.deltaTime + rb.position);
         }
-        else if (random == 3)
+        else //ner
         {
             rb.MovePosition(new Vector2(0, -speed) * Time.deltaTime + rb.position);
         }
@@ -46,12 +48,68 @@ public class Ghost : MonoBehaviour
     {
         if (collision.gameObject.tag == "Point")
         {
+
+            // fortsätt gå tills Ghost är mitt på point i rörelseriktningen
+            // sedan slumpa ny riktning
+           
+            StartCoroutine(waiter(0.9f));
             
-            Debug.Log(collision.gameObject.name);
-            random = Random.Range(0, 3);
-            Debug.Log(random);
 
         }
+        if (collision.gameObject.tag == "GreenPoint")
+        {
+            StartCoroutine(sec(0.7f));
+
+        }
+        if (collision.gameObject.name == "GreenPointCenter")
+        {
+            random = 1;
+        }
+
+        if (collision.gameObject.name == "GreenPointEnd")
+        {
+            StartCoroutine(sec(0.7f));
+
+        }
+    }
+
+    IEnumerator sec(float a)
+    {
+        int number = Random.Range(0, 1);
+        yield return new WaitForSeconds(a);
+        if (greenPoint == 0)
+        {
+            random = 0;
+            greenPoint++;
+        }
+        else if (number == 0)
+        {
+            random = 0;
+        }
+        else
+        {
+            random = 2;
+        }
+
+    }
+
+    IEnumerator waiter(float a)
+    {
+        RandomFunction();
+        yield return new WaitForSeconds(a);
+        
+        
+    }
+
+        public void RandomFunction()
+    {
+        int randomNumber = Random.Range(0, 2);
+        randomNumber *= 2;
+        randomNumber++;
+
+        random += randomNumber;
+        random = random % 4;
+
     }
 
 

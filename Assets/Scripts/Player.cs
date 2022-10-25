@@ -116,7 +116,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Point")
+        if (collision.gameObject.tag == "Point" || collision.gameObject.tag == "GreenPoint")
         {
             if (side == 1)
             {
