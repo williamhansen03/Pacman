@@ -71,6 +71,11 @@ public class Ghost : MonoBehaviour
             StartCoroutine(sec(0.7f));
 
         }
+
+        if (collision.gameObject.tag == "Player")
+        {
+
+        }
     }
 
     IEnumerator sec(float a)

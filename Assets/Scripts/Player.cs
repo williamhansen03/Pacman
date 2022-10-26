@@ -6,7 +6,7 @@ using UnityEditor.UI;
 public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private float speed = 6f;
+    private float speed = 10f;
 
     public GameObject SpawnCircle;
     public GameObject[] BigCircle;
@@ -14,8 +14,17 @@ public class Player : MonoBehaviour
 
     public int side = 1;
 
-    public GameObject ghost;
-    private SpriteRenderer sprite;
+    public GameObject redGhost;
+    public GameObject pinkGhost;
+    public GameObject lightBlueGhost;
+    public GameObject yellowGhost;
+
+    private SpriteRenderer redSprite;
+    private SpriteRenderer pinkSprite;
+    private SpriteRenderer lightBlueSprite;
+    private SpriteRenderer yellowSprite;
+
+    private float blueTimer = 10;
 
     public int score;
     private int GhostScore = 200;
@@ -24,6 +33,13 @@ public class Player : MonoBehaviour
 
     private int circle = 0;
 
+    public Sprite blueGhost;
+
+    public Sprite redGhostSprite;
+    public Sprite pinkGhostSprite;
+    public Sprite lightBluGhostSprite;
+    public Sprite yellowGhostSprite;
+
 
     // Start is called before the first frame update
     void Start()
@@ -31,8 +47,8 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
 
-        sprite = ghost.GetComponent<SpriteRenderer>();
-
+        redSprite = redGhost.GetComponent<SpriteRenderer>();
+        pinkSprite = pinkGhost.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -81,6 +97,20 @@ public class Player : MonoBehaviour
             GhostScore = 200;
         }
 
+        if (BlueGhost == true)
+        {
+            if (blueTimer > 0)
+            {
+                blueTimer -= Time.deltaTime;
+            }
+            else
+            {
+                BlueGhost = false;
+                pinkSprite.sprite = pinkGhostSprite;
+                redSprite.sprite = redGhostSprite;
+            }
+        }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -92,15 +122,33 @@ public class Player : MonoBehaviour
 
 
 
-        if (collision.collider.tag == "Ghost")
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Ghost")
         {
             if (BlueGhost == true)
             {
                 score += GhostScore;
                 GhostScore *= 2;
+                if (collision.gameObject.name == "RedGhost")
+                {
+                    redSprite.sprite = redGhostSprite;
+                    redGhost.transform.position = new Vector3(24, 33, 0);
+                }
+                else if (collision.gameObject.name == "PinkGhost")
+                {
+                    pinkSprite.sprite = pinkGhostSprite;
+                    pinkGhost.transform.position = new Vector3(24, 33, 0);
+                }
 
-                sprite.color = new Color(1, 1, 1);
-                ghost.transform.position = new Vector3(24, 33, 0);
+                //sprite.color = new Color(1, 1, 1);
+                
+
+                
+
                 BlueGhost = false;
                 Debug.Log(GhostScore);
             }
@@ -108,14 +156,16 @@ public class Player : MonoBehaviour
             {
                 ui.SetActive(true);
                 Time.timeScale = 0;
-                
+
             }
-            
+
         }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+
+
         if (collision.gameObject.tag == "Point" || collision.gameObject.tag == "GreenPoint")
         {
             if (side == 1)
@@ -152,8 +202,16 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "BigCircle")
         {
             BlueGhost = true;
+
             score += 50;
-            sprite.color = new Color(0, 0, 1);
+            //sprite.color = new Color(0, 0, 1);
+
+
+            redSprite.sprite = blueGhost;
+            pinkSprite.sprite = blueGhost;
+            
+            
+            
             collision.gameObject.SetActive(false);
         }
     }
