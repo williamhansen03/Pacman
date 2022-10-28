@@ -6,7 +6,7 @@ using UnityEditor.UI;
 public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private float speed = 10f;
+    private float speed = 15f;
 
     public GameObject SpawnCircle;
     public GameObject[] BigCircle;
@@ -24,14 +24,16 @@ public class Player : MonoBehaviour
     private SpriteRenderer lightBlueSprite;
     private SpriteRenderer yellowSprite;
 
-    private float blueTimer = 10;
+    private int ghostEaten = 0;
+
+    private float blueTimer = 15f;
 
     public int score;
     private int GhostScore = 200;
 
     public bool BlueGhost = false;
 
-    private int circle = 0;
+    public int circle = 0;
 
     public Sprite blueGhost;
 
@@ -49,6 +51,8 @@ public class Player : MonoBehaviour
 
         redSprite = redGhost.GetComponent<SpriteRenderer>();
         pinkSprite = pinkGhost.GetComponent<SpriteRenderer>();
+        lightBlueSprite = lightBlueGhost.GetComponent<SpriteRenderer>();
+        yellowSprite = yellowGhost.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -82,7 +86,7 @@ public class Player : MonoBehaviour
             
         }
         
-        if (circle == 190)
+        if (circle == 189)
         {
             SpawnCircle.GetComponent<SpawnCircle>().spawn();
             circle = 0;
@@ -108,7 +112,23 @@ public class Player : MonoBehaviour
                 BlueGhost = false;
                 pinkSprite.sprite = pinkGhostSprite;
                 redSprite.sprite = redGhostSprite;
+                lightBlueSprite.sprite = lightBluGhostSprite;
+                yellowSprite.sprite = yellowGhostSprite;
             }
+        }
+        else
+        {
+            BlueGhost = false;
+            pinkSprite.sprite = pinkGhostSprite;
+            redSprite.sprite = redGhostSprite;
+            lightBlueSprite.sprite = lightBluGhostSprite;
+            yellowSprite.sprite = yellowGhostSprite;
+        }
+
+        if (ghostEaten == 4)
+        {
+            BlueGhost = false;
+            ghostEaten = 0;
         }
 
     }
@@ -133,6 +153,10 @@ public class Player : MonoBehaviour
             {
                 score += GhostScore;
                 GhostScore *= 2;
+
+                ghostEaten++;
+                
+
                 if (collision.gameObject.name == "RedGhost")
                 {
                     redSprite.sprite = redGhostSprite;
@@ -143,14 +167,24 @@ public class Player : MonoBehaviour
                     pinkSprite.sprite = pinkGhostSprite;
                     pinkGhost.transform.position = new Vector3(24, 33, 0);
                 }
+                else if (collision.gameObject.name == "LightBlueSprite")
+                {
+                    lightBlueSprite.sprite = lightBluGhostSprite;
+                    lightBlueGhost.transform.position = new Vector3(24, 33, 0);
+                }
+                else if (collision.gameObject.name == "YellowGhost")
+                {
+                    yellowSprite.sprite = yellowGhostSprite;
+                    yellowGhost.transform.position = new Vector3(24, 33, 0);
+                }
 
                 //sprite.color = new Color(1, 1, 1);
                 
 
                 
 
-                BlueGhost = false;
-                Debug.Log(GhostScore);
+                
+                
             }
             else
             {
@@ -196,8 +230,10 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Circle")
         {
             score += 10;
+
             Destroy(collision.gameObject);
             circle++;
+            
         }
         if (collision.gameObject.tag == "BigCircle")
         {
@@ -209,6 +245,8 @@ public class Player : MonoBehaviour
 
             redSprite.sprite = blueGhost;
             pinkSprite.sprite = blueGhost;
+            lightBlueSprite.sprite = blueGhost;
+            yellowSprite.sprite = blueGhost;
             
             
             

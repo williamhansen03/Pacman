@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Circle : MonoBehaviour
 {
+
+    private GameObject pacman;
     // Start is called before the first frame update
     void Start()
     {
-        
+         
     }
 
     // Update is called once per frame
@@ -20,11 +22,14 @@ public class Circle : MonoBehaviour
     {
         if (collision.GetComponent<Collider2D>().tag == "Wall")
         {
+            
             Destroy(gameObject);
+
         }
 
         if (collision.GetComponent<Collider2D>().tag == "BigCircle")
         {
+            
             Destroy(gameObject);
         }
     }
