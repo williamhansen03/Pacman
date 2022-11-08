@@ -9,7 +9,7 @@ public class Ghost : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    private float speed = 6f;
+    private float speed = 12f;
 
     public int random = 0;
     int greenPoint = 0;

@@ -5,6 +5,8 @@ using UnityEditor.UI;
 
 public class Player : MonoBehaviour
 {
+    private AudioSource pacManMunch;
+
     private Rigidbody2D rb;
     private float speed = 15f;
 
@@ -53,11 +55,17 @@ public class Player : MonoBehaviour
         pinkSprite = pinkGhost.GetComponent<SpriteRenderer>();
         lightBlueSprite = lightBlueGhost.GetComponent<SpriteRenderer>();
         yellowSprite = yellowGhost.GetComponent<SpriteRenderer>();
+
+        pacManMunch = GetComponent<AudioSource>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        
+
 
         float angleRadians = rb.rotation * Mathf.PI / 180f;
         float xSpeed = Mathf.Cos(angleRadians) * speed;
@@ -147,7 +155,8 @@ public class Player : MonoBehaviour
                 GhostScore *= 2;
 
                 ghostEaten++;
-                
+
+                pacManMunch.Play(0);
 
                 if (collision.gameObject.name == "RedGhost")
                 {
@@ -169,13 +178,6 @@ public class Player : MonoBehaviour
                     yellowSprite.sprite = yellowGhostSprite;
                     yellowGhost.transform.position = new Vector3(24, 33, 0);
                 }
-
-                
-                
-
-                
-
-                
                 
             }
             else
@@ -226,6 +228,8 @@ public class Player : MonoBehaviour
             Destroy(collision.gameObject);
             circle++;
             
+            
+
         }
         if (collision.gameObject.tag == "BigCircle")
         {
@@ -243,6 +247,15 @@ public class Player : MonoBehaviour
             
             collision.gameObject.SetActive(false);
         }
+    }
+
+    IEnumerator waiter()
+    {
+        pacManMunch.Play(0);
+        
+        yield return new WaitForSeconds(pacManMunch.clip.length);
+
+
     }
 
 }
