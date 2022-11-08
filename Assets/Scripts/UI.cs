@@ -16,6 +16,7 @@ public class UI : MonoBehaviour
 
     public int s;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,33 +26,37 @@ public class UI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        s = pacman.GetComponent<Player>().score;
-        text.text = "" + s;
+        
+            s = pacman.GetComponent<Player>().score;
+            text.text = "" + s;
 
 
-        if (w == true) 
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (w == true)
             {
-                Time.timeScale = 0;
-                w = false;
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    Time.timeScale = 0;
+                    w = false;
+                }
             }
-        }
-        else
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            else
             {
-                Time.timeScale = 1;
-                w = true;
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    Time.timeScale = 1;
+                    w = true;
+                }
             }
-        }
 
-        PlayerPrefs.GetInt("HighScore", s);
+            PlayerPrefs.GetInt("HighScore", s);
 
-        if (s > PlayerPrefs.GetInt("HighScore", 0))
-        {
-            PlayerPrefs.SetInt("HighScore", s);
-            Highscore.text = s.ToString();
-        }
+            if (s > PlayerPrefs.GetInt("HighScore", 0))
+            {
+                PlayerPrefs.SetInt("HighScore", s);
+                Highscore.text = s.ToString();
+            }
+        
     }
+
+
 }

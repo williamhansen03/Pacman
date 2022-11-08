@@ -6,7 +6,8 @@ using UnityEditor.UI;
 public class Player : MonoBehaviour
 {
     public AudioSource pacManMunch;
-
+    public GameObject mainCamera;
+    
     private Rigidbody2D rb;
     private float speed = 15f;
 
@@ -182,6 +183,7 @@ public class Player : MonoBehaviour
             }
             else
             {
+                mainCamera.GetComponent<AudioSource>().enabled = false;
                 ui.SetActive(true);
                 Time.timeScale = 0;
 
