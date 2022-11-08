@@ -696,7 +696,7 @@ GameObject:
   - component: {fileID: 163721973}
   m_Layer: 0
   m_Name: pacman
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -727,6 +727,7 @@ MonoBehaviour:
   yellowGhost: {fileID: 1214154838}
   score: 0
   BlueGhost: 0
+  circle: 0
   blueGhost: {fileID: 21300000, guid: 98df3ca5b86e2b8418680dfc9adfb576, type: 3}
   redGhostSprite: {fileID: 21300000, guid: 0e604b4aedfc9d4408bdd345739cec58, type: 3}
   pinkGhostSprite: {fileID: 21300000, guid: af17f4120ff75a64b89c7f9d9f649168, type: 3}
@@ -3137,6 +3138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Circle: {fileID: 6916247013752526409, guid: afda37f8f9c92014db65cc09c5e58311, type: 3}
+  pacman: {fileID: 163721967}
 --- !u!1 &1722119135
 GameObject:
   m_ObjectHideFlags: 0

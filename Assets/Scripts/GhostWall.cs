@@ -31,26 +31,26 @@ public class GhostWall : MonoBehaviour
             {
                 Ghost.GetComponent<Ghost>().RandomFunction();
                 rb.position = rb.position + new Vector2(0.2f, 0);
-                //Debug.Log("Left");
+                
             }
             else if (gameObject.name == "Right")
             {
                 Ghost.GetComponent<Ghost>().RandomFunction();
 
                 rb.position = rb.position + new Vector2(-0.2f, 0);
-                //Debug.Log("Right");
+                
             }
             else if (gameObject.name == "Up")
             {
                 Ghost.GetComponent<Ghost>().RandomFunction();
                 rb.position = rb.position + new Vector2(0, -0.2f);
-                //Debug.Log("UP");
+                
             }
             else if (gameObject.name == "Down")
             {
                 Ghost.GetComponent<Ghost>().RandomFunction();
                 rb.position = rb.position + new Vector2(0, 0.2f);
-                //Debug.Log("DOWN");
+                
             }
 
 

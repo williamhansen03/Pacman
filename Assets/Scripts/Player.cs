@@ -103,6 +103,9 @@ public class Player : MonoBehaviour
 
         if (BlueGhost == true)
         {
+            
+            
+
             if (blueTimer > 0)
             {
                 blueTimer -= Time.deltaTime;
@@ -133,17 +136,6 @@ public class Player : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.tag == "Point")
-        {
-            Debug.Log("point");
-        }
-
-
-
-        
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -178,7 +170,7 @@ public class Player : MonoBehaviour
                     yellowGhost.transform.position = new Vector3(24, 33, 0);
                 }
 
-                //sprite.color = new Color(1, 1, 1);
+                
                 
 
                 
@@ -240,9 +232,8 @@ public class Player : MonoBehaviour
             BlueGhost = true;
 
             score += 50;
-            //sprite.color = new Color(0, 0, 1);
 
-
+            blueTimer = 15f;
             redSprite.sprite = blueGhost;
             pinkSprite.sprite = blueGhost;
             lightBlueSprite.sprite = blueGhost;

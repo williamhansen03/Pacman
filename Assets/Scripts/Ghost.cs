@@ -19,7 +19,7 @@ public class Ghost : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
-        //rb.position = new Vector3(24, 33, 0);
+        
     }
 
     void FixedUpdate()

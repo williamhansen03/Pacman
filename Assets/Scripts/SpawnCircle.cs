@@ -22,7 +22,7 @@ public class SpawnCircle : MonoBehaviour
         {
             for (int i = 0; i < 55; i+=3)
             {
-                //pacman.GetComponent<Player>().circle += 1;
+                
                 Instantiate(Circle, new Vector2(i, y), Quaternion.identity);
             }
 

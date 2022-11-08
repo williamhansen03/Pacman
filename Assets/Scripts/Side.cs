@@ -8,8 +8,6 @@ public class Side : MonoBehaviour
 
     public Transform right;
     public Transform left;
-    public Transform pacman;
-    public Transform ghost;
 
     public Vector3 offset;
 
@@ -31,12 +29,12 @@ public class Side : MonoBehaviour
         {
             if (RighitWall == true)
             {
-                pacman.transform.position = left.position + offset;
+                collision.gameObject.transform.position = left.position + offset;
                 
             }
             if (RighitWall == false)
             {
-                pacman.transform.position = right.position + offset;
+                collision.gameObject.transform.position = right.position + offset;
                 
             }
         }
@@ -45,18 +43,19 @@ public class Side : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Ghost")
+        if (collision.gameObject.tag == "Ghost")
         {
             if (RighitWall == true)
             {
-                ghost.transform.position = left.position + offset;
+                collision.gameObject.transform.position = left.position + offset;
 
             }
             if (RighitWall == false)
             {
-                ghost.transform.position = right.position + offset;
+                collision.gameObject.transform.position = right.position + offset;
 
             }
         }
+
     }
 }
