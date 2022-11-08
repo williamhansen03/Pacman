@@ -5,7 +5,7 @@ using UnityEditor.UI;
 
 public class Player : MonoBehaviour
 {
-    private AudioSource pacManMunch;
+    public AudioSource pacManMunch;
 
     private Rigidbody2D rb;
     private float speed = 15f;
@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
         lightBlueSprite = lightBlueGhost.GetComponent<SpriteRenderer>();
         yellowSprite = yellowGhost.GetComponent<SpriteRenderer>();
 
-        pacManMunch = GetComponent<AudioSource>();
+        
 
     }
 
@@ -227,8 +227,11 @@ public class Player : MonoBehaviour
 
             Destroy(collision.gameObject);
             circle++;
-            
-            
+            pacManMunch.Play(0);
+
+
+
+
 
         }
         if (collision.gameObject.tag == "BigCircle")
